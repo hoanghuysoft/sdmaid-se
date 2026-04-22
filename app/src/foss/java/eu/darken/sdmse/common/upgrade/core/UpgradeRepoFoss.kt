@@ -36,15 +36,12 @@ class UpgradeRepoFoss @Inject constructor(
         fossCache.upgrade.flow,
         refreshTrigger
     ) { data, _ ->
-        if (data == null) {
-            Info()
-        } else {
-            Info(
-                isPro = true,
-                upgradedAt = data.upgradedAt,
-                fossUpgradeType = data.upgradeType,
-            )
-        }
+        // FOSS local builds should always run with Pro feature gates unlocked.
+        Info(
+            isPro = true,
+            upgradedAt = data?.upgradedAt,
+            fossUpgradeType = data?.upgradeType,
+        )
     }
         .setupCommonEventHandlers(TAG) { "upgradeInfo" }
         .shareIn(appScope, SharingStarted.WhileSubscribed(3000L, 0L), replay = 1)
