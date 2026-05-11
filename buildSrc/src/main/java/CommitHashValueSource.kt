@@ -12,7 +12,7 @@ abstract class CommitHashValueSource : ValueSource<String, ValueSourceParameters
     override fun obtain(): String {
         val output = ByteArrayOutputStream()
         execOperations.exec {
-            commandLine("git", "rev-parse", "--short", "HEAD")
+            commandLine("C:\\Program Files\\Git\\bin\\git.exe", "rev-parse", "--short", "HEAD")
             standardOutput = output
         }
         return String(output.toByteArray(), Charset.defaultCharset()).trim()
